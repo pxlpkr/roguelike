@@ -1,0 +1,4 @@
+.vscode
+bin/
+Application.dSYM/
+.DS_Store
