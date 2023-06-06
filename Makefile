@@ -1,5 +1,5 @@
 INCLUDE_FILES = -I lib/SDL/include
-SOURCE_FILES = bin/src/main.o
+SOURCE_FILES = bin/src/main.o bin/src/buffer.o bin/src/renderer.o bin/src/state.o bin/src/window.o
 
 LIB_LINKS = -lm
 LIB_LINKS += $(shell bin/sdl/sdl2-config --prefix=bin --static-libs)
@@ -14,10 +14,10 @@ clean:
 mkbin:
 	mkdir -p bin/src
 
-%.o: src/%.c mkbin
-	cc -o bin/src/$@ -c $(INCLUDE_FILES) -O2 $<
+bin/src/%.o: src/%.c mkbin
+	cc -o $@ -c $(INCLUDE_FILES) -O2 $<
 
-build: main.o
+build: $(SOURCE_FILES)
 	cc -o bin/app $(SOURCE_FILES) $(LIB_LINKS) -O2
 
 run: build
